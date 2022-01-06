@@ -1,14 +1,11 @@
 import sys
 import pathlib
 import os.path
+import importlib
 import 小说下载.基础 as 小说下载
-import 小说下载.求书网 as 求书网
-import 小说下载.笔趣看 as 笔趣看
-import 小说下载.笔趣阁 as 笔趣阁
-import 小说下载.笔趣阁2 as 笔趣阁2
-import 小说下载.顶点小说 as 顶点小说
-ca模块 = [求书网, 笔趣看, 笔趣阁, 笔趣阁2, 顶点小说]
-c版权 = "小说下载器 (c) 2020 cflw"
+ca模块 = ["求书网", "笔趣看", "笔趣阁", "笔趣阁2", "阁笔趣", "顶点小说"]
+va模块 = list(map(lambda x: importlib.import_module(f"小说下载.{x}"), ca模块))
+c版权 = "小说下载器 (c) 2022 cflw"
 g保存路径 = pathlib.Path(sys.argv[0]).parent
 class C命令解析器:
 	def __init__(self):
@@ -35,7 +32,7 @@ class C命令解析器:
 		except Exception as e:
 			print(e)
 	def f命令_下载(self, a地址):
-		for v模块 in ca模块:
+		for v模块 in va模块:
 			if v模块.c域名 in a地址:
 				v小说 = v模块.f获取小说(a地址)
 				小说下载.f一键下载(v小说, g保存路径)
